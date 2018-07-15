@@ -6,12 +6,18 @@ With this test code I could read from a cifs-share with kerberos sso. I have use
 
 ## Installation
 
-### apache kerb auth
+* AD-Domain: domain.local
+* DC: 192.168.1.40
+* Testserver: 192.168.1.50
+* Testserver-vhost-url: test.domain.local
+
+
+### testserver: apache kerb auth
 ```
 apt-get install libapache2-mod-auth-kerb
 ```
 
-### php wraper smbclient
+### testserver: php wraper smbclient
 
 ```
 apt-get install php-pear php5-dev libsmbclient libsmbclient-dev 
@@ -19,7 +25,7 @@ pecl install smbclient
 ```
 add extension-name to php.ini and restart apache
 
-### php wrapper krb5
+### testserver: php wrapper krb5
 do not know if all libs are necessary. if you find out please give me a hint.
 ```
 apt-get install libcurl3-openssl-dev krb5-dev libgssapi-krb5-2 libgssapi-krb5-2-dev libkrb5-dev
@@ -27,17 +33,13 @@ pecl install krb5
 ```
 add extension-name to php.ini and restart apache
 
-### debug-tool
+### testserver: debug-tool
 ```
 apt-get install smbclient 
 ```
 
-### apache config
+### testserver: apache config
 
-* AD-Domain: domain.local
-* DC: 192.168.1.40
-* Testserver: 192.168.1.50
-* Testserver-vhost-url: test.domain.local
 
 ```
 <Location />
@@ -53,7 +55,7 @@ apt-get install smbclient
 </Location>
 ```
 
-### keytab creation
+### dc: keytab creation
 
 create a keytab on dc and transfer to the testserver:
 
@@ -65,7 +67,7 @@ samba-tool dns add 192.168.1.40 domain.local test A 192.168.1.50
 ```
 transfer keytab to testserver by scp
 
-### krb5.conf
+### client: krb5.conf
 
 ```
 [libdefaults]
@@ -78,6 +80,17 @@ transfer keytab to testserver by scp
         }
         [...]
 ```
+
+### ad: config kerberos delegation
+
+configure kerberos delegation for the test-service account. for the test i used unconstrained delegation. it should work with constrained delegation as well. you can use samba-tool or the microsoft tool ad user and groups.
+* https://www.samba.org/samba/docs/current/man-html/samba-tool.8.html
+* https://blogs.msdn.microsoft.com/autz_auth_stuff/2011/05/03/kerberos-delegation/
+
+### client: config browser
+
+in internet options you have to add test.domain.local to the trusted sites.
+* https://ping.force.com/Support/PingFederate/Integrations/How-to-configure-supported-browsers-for-Kerberos-NTLM
 
 ## Hints
 * try to access the cifs share with smbclient on the testserver to test the connection. I had to create some static dns records because my testserver is not domain-joined and uses an other dns-server than the domain.
