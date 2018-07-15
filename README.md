@@ -34,10 +34,10 @@ apt-get install smbclient
 
 ### apache config
 
-AD-Domain: domain.local
-DC: 192.168.1.40
-Testserver: 192.168.1.50
-Testserver-vhost-url: test.domain.local
+* AD-Domain: domain.local
+* DC: 192.168.1.40
+* Testserver: 192.168.1.50
+* Testserver-vhost-url: test.domain.local
 
 ```
 <Location />
