@@ -76,8 +76,14 @@
      $state = smbclient_state_new();
      smbclient_option_set($state, SMBCLIENT_OPT_USE_KERBEROS, true);
 
+     if (version_compare(PHP_VERSION, '7.2.0') >= 0) {
+       smbclient_state_init($state, "DOMAIN.LOCAL" , "some_text");
+     }
+     else
+     {
      // Bug?: If the field username is null, the kerberos auth is not working.
      smbclient_state_init($state, null , "some_text", null);
+     }
      print "error-code smbclient_state_init: " . smbclient_state_errno($state) . "\n";
 
      // Open a file for reading:
