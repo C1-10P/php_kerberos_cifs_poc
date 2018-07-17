@@ -46,6 +46,7 @@
      {
         echo "Error: apache did not cache the kerberos token! \n";
         echo "maybe a server problem: check apache and kerberos config files. \n";
+	echo "maybe a ad problem: check if service account hat delegation enabled. \n";
         echo "maybe a client problem: check your browser setting, trigger klist purge, reboot client. \n";
         die();
      }
