@@ -99,6 +99,10 @@ in internet options you have to add test.domain.local to the trusted sites.
 smbclient //domain.local/netlogon -U Administrator
 ```
 
+* the code does not work on every distribution and php-config.
+  * Ubuntu 18.04 (pecl krb5 and pecl smbclient) works
+  * Centos OS 7 (pecl krb5 and pecl smbclient) in php-fpm config and selinux off I do not get it to work :(
+
 ### License
 
 GPL v3
