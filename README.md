@@ -122,10 +122,10 @@ yum install krb5-devel
 /opt/rh/rh-php71/root/bin/pecl install krb5
 /opt/rh/rh-php71/root/bin/pecl install smbclient
 ```
-* php-fpm config (/etc/opt/rh/rh-php71/php-fpm.d/www.conf) sample: centos7-scl/www.conf
-* php-apache-loader (/opt/rh/httpd24/root/etc/httpd/conf.d/php.conf) sample: centos7-scl/php.conf
-* php-krb5-ext-loader (/etc/opt/rh/rh-php71/php.d/krb5.ini): centos7-scl/krb5.ini
-* php-smbclient-ext-loader (/etc/opt/rh/rh-php71/php.d/smbclient.ini): centos7-scl/smbclient.ini
+* php-fpm config (/etc/opt/rh/rh-php71/php-fpm.d/www.conf) sample: centos7-scl_www.conf
+* php-apache-loader (/opt/rh/httpd24/root/etc/httpd/conf.d/php.conf) sample: centos7-scl_php.conf
+* php-krb5-ext-loader (/etc/opt/rh/rh-php71/php.d/krb5.ini): centos7-scl_krb5.ini
+* php-smbclient-ext-loader (/etc/opt/rh/rh-php71/php.d/smbclient.ini): centos7-scl_smbclient.ini
 
 ```
 systemctl start rh-php71-php-fpm
