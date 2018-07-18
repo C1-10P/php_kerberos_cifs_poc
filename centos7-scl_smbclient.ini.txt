@@ -1,0 +1,2 @@
+;/etc/opt/rh/rh-php71/php.d/smbclient.ini
+extension=smbclient.so
