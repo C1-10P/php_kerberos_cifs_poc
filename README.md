@@ -101,7 +101,38 @@ smbclient //domain.local/netlogon -U Administrator
 
 * the code does not work on every distribution and php-config.
   * Ubuntu 18.04 (pecl krb5 and pecl smbclient) works
-  * Centos OS 7 (pecl krb5 and pecl smbclient) in php-fpm config and selinux off I do not get it to work :(
+  * Centos OS 7 works with software collections
+  
+#### Cent OS 7
+newer apache and mod_auth_kerb:
+```
+yum install centos-release-scl
+yum install httpd24
+yum install httpd24-mod_auth_kerb
+systemctl start httpd24-httpd
+```
+php-fpm with krb5 and smbclient
+
+```
+yum install rh-php71 rh-php71-php-fpm rh-php71-php-pear
+yum install rh-php71-php-devel rh-php71-devel
+yum group install "Development Tools"
+yum install libsmbclient-devel
+yum install krb5-devel
+/opt/rh/rh-php71/root/bin/pecl install krb5
+/opt/rh/rh-php71/root/bin/pecl install smbclient
+```
+* php-fpm config (/etc/opt/rh/rh-php71/php-fpm.d/www.conf) sample: centos7-scl/www.conf
+* php-apache-loader (/opt/rh/httpd24/root/etc/httpd/conf.d/php.conf) sample: centos7-scl/php.conf
+* php-krb5-ext-loader (/etc/opt/rh/rh-php71/php.d/krb5.ini): centos7-scl/krb5.ini
+* php-smbclient-ext-loader (/etc/opt/rh/rh-php71/php.d/smbclient.ini): centos7-scl/smbclient.ini
+
+```
+systemctl start rh-php71-php-fpm
+```
+
+* maybe: disable selinunx /etc/sysconfig/selinux 
+* optional: yum install samba-client
 
 ### License
 
